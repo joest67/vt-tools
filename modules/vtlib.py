@@ -12,6 +12,7 @@ import ConfigParser
 import postfile
 import sys
 
+
 def isFile(file):
     file = file.strip()
     if (not os.path.isfile(file)):
@@ -22,9 +23,9 @@ def isFile(file):
 # Your VirusTotal key
 config_file = os.path.expanduser('~/.vt-tools.conf')
 
-public  = False
+public = False
 private = False
-public_sleeptime  = 15
+public_sleeptime = 15
 private_sleeptime = 1
 
 if (isFile(config_file)):
@@ -41,7 +42,7 @@ if (isFile(config_file)):
     try:
         public = config.get('Global', 'public')
     except:
-       pass
+        pass
     if (public):
         try:
             public_key = config.get('Global', 'public_key')
@@ -54,7 +55,7 @@ if (isFile(config_file)):
             print "Missing public_requests = 20 (default) section in configuration file"
             sys.exit(2)
         public_sleeptime = 60 * 5 / public_requests
-        public_url_get  = "https://www.virustotal.com/api/get_file_report.json"
+        public_url_get = "https://www.virustotal.com/api/get_file_report.json"
         public_url_scan = "http://www.virustotal.com/api/scan_file.json"
     try:
         private = config.get('Global', 'private')

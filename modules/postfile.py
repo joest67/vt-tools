@@ -1,5 +1,7 @@
-## {{{ http://code.activestate.com/recipes/146306/ (r1)
-import httplib, mimetypes
+# {{{ http://code.activestate.com/recipes/146306/ (r1)
+import httplib
+import mimetypes
+
 
 def post_multipart(host, selector, fields, files):
     """
@@ -18,6 +20,7 @@ def post_multipart(host, selector, fields, files):
     errcode, errmsg, headers = h.getreply()
     return h.file.read()
 
+
 def encode_multipart_formdata(fields, files):
     """
     fields is a sequence of (name, value) elements for regular form fields.
@@ -34,7 +37,8 @@ def encode_multipart_formdata(fields, files):
         L.append(value)
     for (key, filename, value) in files:
         L.append('--' + BOUNDARY)
-        L.append('Content-Disposition: form-data; name="%s"; filename="%s"' % (key, filename))
+        L.append(
+            'Content-Disposition: form-data; name="%s"; filename="%s"' % (key, filename))
         L.append('Content-Type: %s' % get_content_type(filename))
         L.append('')
         L.append(value)
@@ -44,7 +48,7 @@ def encode_multipart_formdata(fields, files):
     content_type = 'multipart/form-data; boundary=%s' % BOUNDARY
     return content_type, body
 
+
 def get_content_type(filename):
     return mimetypes.guess_type(filename)[0] or 'application/octet-stream'
-## end of http://code.activestate.com/recipes/146306/ }}}
-
+# end of http://code.activestate.com/recipes/146306/ }}}

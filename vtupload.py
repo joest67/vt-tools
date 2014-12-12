@@ -15,6 +15,7 @@ import time
 import re
 import os
 
+
 def guesspath():
     pp = os.path.realpath(sys.argv[0])
     lpath = os.path.split(pp)
@@ -24,13 +25,16 @@ modulespath = guesspath() + "/modules/"
 sys.path.append(modulespath)
 import vtlib
 
+
 def sendFile(file):
     host = "www.virustotal.com"
     fields = [("key", vtlib.public_key)]
     file_to_send = open(file, "rb").read()
     files = [("file", file, file_to_send)]
-    json = vtlib.postfile.post_multipart(host, vtlib.public_url_scan, fields, files)
+    json = vtlib.postfile.post_multipart(
+        host, vtlib.public_url_scan, fields, files)
     print json
+
 
 def showUsage():
     print 'CIRCL Virus Total tools - vtupload.py'
